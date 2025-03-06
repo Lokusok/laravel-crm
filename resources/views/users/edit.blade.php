@@ -39,7 +39,7 @@
 
                         <div class="mt-4">
                             <x-primary-button>
-                                {{ __('Create') }}
+                                {{ __('Edit') }}
                             </x-primary-button>
                         </div>
                     </form>
