@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\PermissionsEnum;
 use App\Enums\RolesEnum;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProfileController;
@@ -21,7 +22,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::resource('users', UserController::class)->middleware(['role:' . RolesEnum::ADMIN->value]);
+    Route::resource('users', UserController::class)->middleware(['can:' . PermissionsEnum::MANAGE_USERS->value]);
     Route::resource('clients', ClientController::class);
     Route::resource('projects', ProjectController::class);
     Route::resource('tasks', TaskController::class);

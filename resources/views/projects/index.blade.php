@@ -100,21 +100,23 @@
                                                             Edit
                                                         </a>
 
-                                                        <form
-                                                            action="{{ route('projects.destroy', $project) }}"
-                                                            method="POST"
-                                                            onsubmit="return confirm('Are you sure?')"
-                                                        >
-                                                            @csrf
-                                                            @method('DELETE')
-
-                                                            <button
-                                                                type="submit"
-                                                                class="text-red-500 transition-colors duration-200 hover:text-red-800 active:opacity-60 focus:outline-none"
+                                                        @can (App\Enums\PermissionsEnum::DELETE_PROJECTS->value)
+                                                            <form
+                                                                action="{{ route('projects.destroy', $project) }}"
+                                                                method="POST"
+                                                                onsubmit="return confirm('Are you sure?')"
                                                             >
-                                                                Delete
-                                                            </button>
-                                                        </form>
+                                                                @csrf
+                                                                @method('DELETE')
+
+                                                                <button
+                                                                    type="submit"
+                                                                    class="text-red-500 transition-colors duration-200 hover:text-red-800 active:opacity-60 focus:outline-none"
+                                                                >
+                                                                    Delete
+                                                                </button>
+                                                            </form>
+                                                        @endcan
                                                     </div>
                                                 </td>
                                             </tr>
