@@ -4,6 +4,7 @@ use App\Enums\RolesEnum;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,6 +24,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('users', UserController::class)->middleware(['role:' . RolesEnum::ADMIN->value]);
     Route::resource('clients', ClientController::class);
     Route::resource('projects', ProjectController::class);
+    Route::resource('tasks', TaskController::class);
 });
 
 require __DIR__.'/auth.php';
