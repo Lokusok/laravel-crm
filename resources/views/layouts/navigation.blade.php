@@ -16,9 +16,11 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
 
-                    <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.*')">
-                        {{ __('Users') }}
-                    </x-nav-link>
+                    @role(App\Enums\RolesEnum::ADMIN)
+                        <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.*')">
+                            {{ __('Users') }}
+                        </x-nav-link>
+                    @endrole
                 </div>
             </div>
 
@@ -75,9 +77,11 @@
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
 
-            <x-responsive-nav-link :href="route('users.index')" :active="request()->routeIs('users.*')">
-                {{ __('Users') }}
-            </x-responsive-nav-link>
+            @role(App\Enums\RolesEnum::ADMIN)
+                <x-responsive-nav-link :href="route('users.index')" :active="request()->routeIs('users.*')">
+                    {{ __('Users') }}
+                </x-responsive-nav-link>
+            @endrole
         </div>
 
         <!-- Responsive Settings Options -->
