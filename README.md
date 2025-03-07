@@ -16,6 +16,7 @@
 1. `make install`
 2. `make start`
 3. `make setup`
+4. Через веб-интерфейс Minio (`localhost:8900`) создайте bucket с названием `laravel` и откройте его публично
 
 ---
 
