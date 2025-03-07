@@ -41,7 +41,9 @@ class ProjectController extends Controller
     {
         $validated = $request->validated();
 
-        $validated['preview_url'] = $this->previewUploader->storePreview($validated['preview_url']);
+        if (isset($validated['preview_url'])) {
+            $validated['preview_url'] = $this->previewUploader->storePreview($validated['preview_url']);
+        }
 
         Project::create($validated);
 
@@ -60,7 +62,9 @@ class ProjectController extends Controller
     {
         $validated = $request->validated();
 
-        $validated['preview_url'] = $this->previewUploader->storePreview($validated['preview_url']);
+        if (isset($validated['preview_url'])) {
+            $validated['preview_url'] = $this->previewUploader->storePreview($validated['preview_url']);
+        }
 
         $project->update($validated);
 

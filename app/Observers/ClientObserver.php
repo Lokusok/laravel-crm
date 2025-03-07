@@ -9,16 +9,16 @@ class ClientObserver
 {
     public function created(): void
     {
-        Cache::forget(ClientsEnum::CLIENTS_INDEX->value);
+        Cache::tags([ClientsEnum::GLOBAL_NAME])->flush();
     }
 
     public function updated(): void
     {
-        Cache::forget(ClientsEnum::CLIENTS_INDEX->value);
+        Cache::tags([ClientsEnum::GLOBAL_NAME])->flush();
     }
 
     public function deleted(): void
     {
-        Cache::forget(ClientsEnum::CLIENTS_INDEX->value);
+        Cache::tags([ClientsEnum::GLOBAL_NAME])->flush();
     }
 }

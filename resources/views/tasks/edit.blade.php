@@ -89,7 +89,7 @@
                         <div class="mt-4">
                             <x-input-label for="status" :value="__('Status')" />
                             <select id="status" name="status" class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
-                                @foreach (App\Enums\ProjectStatus::cases() as $status)
+                                @foreach (App\Enums\TaskStatus::cases() as $status)
                                     <option
                                         value="{{ $status->value }}"
                                         @selected(old('status', $task->status->value) == $status->value)

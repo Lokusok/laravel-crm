@@ -7,14 +7,17 @@ use App\Enums\PermissionsEnum;
 use App\Http\Requests\Clients\StoreClientRequest;
 use App\Http\Requests\Clients\UpdateClientRequest;
 use App\Models\Client;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Gate;
 
 class ClientController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $clients = Cache::remember(ClientsEnum::CLIENTS_INDEX->value, 30, function () {
+        $cacheKey = ClientsEnum::CLIENTS_INDEX->value . ':' . ($request->page ?? '0');
+
+        $clients = Cache::tags([ClientsEnum::GLOBAL_NAME->value])->remember($cacheKey, 30, function () {
             return Client::latest()->paginate(20);
         });
 

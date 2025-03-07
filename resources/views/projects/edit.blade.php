@@ -5,7 +5,7 @@
                 {{ __('Edit project') }}
             </h2>
             @if ($project->preview_url)
-                <img src="{{ asset('storage/' . $project->preview_url) }}" alt="{{ $project->title }}">
+                <img src="{{ Storage::cloud()->url($project->preview_url) }}" alt="{{ $project->title }}">
             @endif
         </div>
     </x-slot>
@@ -81,7 +81,7 @@
                                 @foreach (App\Enums\ProjectStatus::cases() as $status)
                                     <option
                                         value="{{ $status->value }}"
-                                        @selected(old('status', $project->status) == $status->value)
+                                        @selected(old('status', $project->status->value) == $status->value)
                                     >
                                         {{ $status->value }}
                                     </option>

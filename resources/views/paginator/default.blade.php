@@ -18,8 +18,9 @@
         <div class="items-center hidden md:flex gap-x-3">
             @for ($page = 1; $page <= $paginator->lastPage(); $page++)
                 <a href="{{ $paginator->url($page) }}"
-                    @class([ "px-2 py-1 text-sm text-blue-500 rounded-md bg-blue-100/60"
-                    , "bg-blue-700 text-white font-bold"=> $page === $paginator->currentPage(),
+                    @class([
+                        "px-2 py-1 text-sm text-blue-500 rounded-md bg-blue-100/60",
+                        "bg-blue-700 text-white font-bold" => $page == $paginator->currentPage(),
                     ])
                     >
                     {{ $page }}
