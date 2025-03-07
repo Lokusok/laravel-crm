@@ -9,7 +9,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg py-[20px]">
                 <div class="px-4">
-                    <form action="{{ route('projects.store') }}" method="POST">
+                    <form action="{{ route('projects.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
 
                         <!-- Title -->
@@ -82,6 +82,20 @@
                                 @endforeach
                             </select>
                             <x-input-error :messages="$errors->get('status')" class="mt-2" />
+                        </div>
+
+                        <!-- Preview -->
+                        <div class="mt-4">
+                            <x-input-label for="preview_url" :value="__('Preview')" />
+                            <div class="border border-gray-300 rounded shadow-sm relative h-[40px]">
+                                <input
+                                    id="preview_url"
+                                    name="preview_url"
+                                    type="file"
+                                    class="block mt-1 w-full h-full focus:border-indigo-500 focus:ring-indigo-500 absolute l-0 t-0"
+                                >
+                            </div>
+                            <x-input-error :messages="$errors->get('preview_url')" class="mt-2" />
                         </div>
 
                         <div class="mt-4">

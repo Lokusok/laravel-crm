@@ -58,6 +58,19 @@
                                                 </td>
                                                 <td class="px-4 py-4 text-sm font-medium text-gray-700 whitespace-nowrap">
                                                     <div class="inline-flex items-center gap-x-3">
+                                                        @if ($project->preview_url)
+                                                            <img
+                                                                class="w-[60px] h-[60px]"
+                                                                src="{{ asset('storage/' . $project->preview_url) }}"
+                                                                alt="{{ $project->title }}"
+                                                            >
+                                                        @else
+                                                            <span>No preview</span>
+                                                        @endif
+                                                    </div>
+                                                </td>
+                                                <td class="px-4 py-4 text-sm font-medium text-gray-700 whitespace-nowrap">
+                                                    <div class="inline-flex items-center gap-x-3">
                                                         <span>{{ $project->user->first_name }} {{ $project->user->last_name }}</span>
                                                     </div>
                                                 </td>

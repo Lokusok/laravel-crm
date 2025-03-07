@@ -8,17 +8,25 @@ use App\Http\Requests\Projects\UpdateProjectRequest;
 use App\Models\Client;
 use App\Models\Project;
 use App\Models\User;
-use Illuminate\Http\Request;
+use App\Services\PreviewUploader;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Laravel\Facades\Image;
 
 class ProjectController extends Controller
 {
+    public function __construct(
+        private PreviewUploader $previewUploader
+    )
+    {}
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $projects = Project::with(['user', 'client'])->paginate(10);
+        $projects = Project::with(['user', 'client'])->latest()->paginate(10);
 
         return view('projects.index', compact('projects'));
     }
@@ -40,6 +48,8 @@ class ProjectController extends Controller
     public function store(StoreProjectRequest $request)
     {
         $validated = $request->validated();
+
+        $validated['preview_url'] = $this->previewUploader->storePreview($validated['preview_url']);
 
         Project::create($validated);
 
@@ -71,6 +81,8 @@ class ProjectController extends Controller
     public function update(UpdateProjectRequest $request, Project $project)
     {
         $validated = $request->validated();
+
+        $validated['preview_url'] = $this->previewUploader->storePreview($validated['preview_url']);
 
         $project->update($validated);
 

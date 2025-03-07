@@ -1,15 +1,20 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Edit project') }}
-        </h2>
+        <div class="flex gap-x-3 items-center">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                {{ __('Edit project') }}
+            </h2>
+            @if ($project->preview_url)
+                <img src="{{ asset('storage/' . $project->preview_url) }}" alt="{{ $project->title }}">
+            @endif
+        </div>
     </x-slot>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg py-[20px]">
                 <div class="px-4">
-                    <form action="{{ route('projects.update', $project) }}" method="POST">
+                    <form action="{{ route('projects.update', $project) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
 
@@ -83,6 +88,20 @@
                                 @endforeach
                             </select>
                             <x-input-error :messages="$errors->get('status')" class="mt-2" />
+                        </div>
+
+                        <!-- Preview -->
+                        <div class="mt-4">
+                            <x-input-label for="preview_url" :value="__('Preview')" />
+                            <div class="border border-gray-300 rounded shadow-sm relative h-[40px]">
+                                <input
+                                    id="preview_url"
+                                    name="preview_url"
+                                    type="file"
+                                    class="block mt-1 w-full h-full focus:border-indigo-500 focus:ring-indigo-500 absolute l-0 t-0"
+                                >
+                            </div>
+                            <x-input-error :messages="$errors->get('preview_url')" class="mt-2" />
                         </div>
 
                         <div class="mt-4">

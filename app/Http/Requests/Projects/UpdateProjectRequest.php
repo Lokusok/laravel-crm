@@ -25,6 +25,7 @@ class UpdateProjectRequest extends FormRequest
             'client_id' => ['required', Rule::exists('clients', 'id')],
             'deadline_at' => ['required', 'date'],
             'status' => ['required', Rule::enum(ProjectStatus::class)],
+            'preview_url' => ['nullable', 'image', 'max:4096']
         ];
     }
 }
