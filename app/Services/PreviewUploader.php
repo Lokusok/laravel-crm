@@ -15,7 +15,7 @@ final class PreviewUploader
 
         $path = 'previews/' . Str::random() . '.' . $file->getClientOriginalExtension();
 
-        $result = Storage::disk('public')->put(
+        $result = Storage::cloud()->put(
             $path,
             $image->encodeByExtension($file->getClientOriginalExtension(), quality: 90)
         );
