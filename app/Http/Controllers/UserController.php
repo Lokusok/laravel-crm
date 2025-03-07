@@ -12,7 +12,9 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = Cache::remember(UsersEnum::USERS_INDEX->value, 30, function () {
+        $cacheKey = UsersEnum::USERS_INDEX->value . ':' . ($request->page ?? '0');
+
+        $users = Cache::tags([UsersEnum::GLOBAL_NAME->value])->remember($cacheKey, 30, function () {
             return User::latest()->paginate(10);
         });
 

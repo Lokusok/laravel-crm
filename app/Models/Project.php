@@ -23,6 +23,7 @@ class Project extends Model
         'user_id',
         'client_id',
         'deadline_at',
+        'completed_at',
         'status',
         'preview_url',
     ];
@@ -41,7 +42,8 @@ class Project extends Model
     {
         return [
             'status' => ProjectStatus::class,
-            'deadline_at' => 'datetime'
+            'deadline_at' => 'datetime',
+            'completed_at' => 'datetime',
         ];
     }
 }

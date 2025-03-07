@@ -20,11 +20,19 @@ class ProjectFactory extends Factory
         $users = User::pluck('id');
         $clients = Client::pluck('id');
 
+        $currentStatus = fake()->randomElement(ProjectStatus::cases());
+        $completedAt = null;
+
+        if ($currentStatus === ProjectStatus::COMPLETED) {
+            $completedAt = now();
+        }
+
         return [
             'title' => fake()->sentence(3),
             'description' => fake()->paragraph(),
             'deadline_at' => now()->addDays(rand(1, 30))->format('Y-m-d'),
-            'status' => fake()->randomElement(ProjectStatus::cases())->value,
+            'completed_at' => $completedAt,
+            'status' => $currentStatus->value,
             'user_id' => $users->random(),
             'client_id' => $clients->random(),
         ];

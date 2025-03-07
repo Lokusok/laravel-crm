@@ -9,16 +9,16 @@ class UserObserver
 {
     public function created(): void
     {
-        Cache::forget(UsersEnum::USERS_INDEX->value);
+        Cache::tags([UsersEnum::GLOBAL_NAME->value])->flush();
     }
 
     public function updated(): void
     {
-        Cache::forget(UsersEnum::USERS_INDEX->value);
+        Cache::tags([UsersEnum::GLOBAL_NAME->value])->flush();
     }
 
     public function deleted(): void
     {
-        Cache::forget(UsersEnum::USERS_INDEX->value);
+        Cache::tags([UsersEnum::GLOBAL_NAME->value])->flush();
     }
 }

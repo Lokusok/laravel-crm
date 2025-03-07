@@ -15,14 +15,16 @@ class ProjectObserver
 {
     public function created(): void
     {
-        Cache::forget(ProjectsEnum::PROJECTS_INDEX->value);
+        Cache::tags([ProjectsEnum::GLOBAL_NAME->value])->flush();
     }
 
-    public function updated(Project $project): void
+    public function updating(Project $project): void
     {
-        Cache::forget(ProjectsEnum::PROJECTS_INDEX->value);
+        Cache::tags([ProjectsEnum::GLOBAL_NAME->value])->flush();
 
-        if ($project->status === ProjectStatus::COMPLETED) {
+        if (! $project->completed_at && $project->status === ProjectStatus::COMPLETED) {
+            $project->completed_at = now();
+
             Log::info("{$project->title} is done!");
 
             $admin = User::where('first_name', 'Admin')->first();
@@ -37,6 +39,6 @@ class ProjectObserver
 
     public function deleted(): void
     {
-        Cache::forget(ProjectsEnum::PROJECTS_INDEX->value);
+        Cache::tags([ProjectsEnum::GLOBAL_NAME->value])->flush();
     }
 }

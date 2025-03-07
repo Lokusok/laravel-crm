@@ -22,7 +22,9 @@ class ProjectController extends Controller
 
     public function index()
     {
-        $projects = Cache::remember(ProjectsEnum::PROJECTS_INDEX->value, 30, function () {
+        $cacheKey = ProjectsEnum::GLOBAL_NAME->value . ':' . ($request->page ?? '0');
+
+        $projects = Cache::tags([ProjectsEnum::GLOBAL_NAME->value])->remember($cacheKey, 30, function () {
             return Project::with(['user', 'client'])->latest()->paginate(10);
         });
 

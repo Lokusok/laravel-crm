@@ -21,6 +21,14 @@ services:
           - redis_data:/data
         restart: always
 
+    mailpit:
+        image: axllent/mailpit
+        container_name: mailpit
+        ports:
+          - "8025:8025"
+          - "1025:1025"
+        restart: always
+
 volumes:
     minio_data:
     redis_data:

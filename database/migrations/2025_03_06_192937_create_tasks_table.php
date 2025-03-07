@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('description');
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('client_id')->constrained();
-            $table->foreignId('project_id')->constrained();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('client_id')->constrained()->onDelete('cascade');
+            $table->foreignId('project_id')->constrained()->onDelete('cascade');
             $table->date('deadline_at');
             $table->string('status');
             $table->timestamps();

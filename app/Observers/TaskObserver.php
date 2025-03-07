@@ -9,16 +9,16 @@ class TaskObserver
 {
     public function created(): void
     {
-        Cache::forget(TasksEnum::TASKS_INDEX->value);
+        Cache::tags([TasksEnum::GLOBAL_NAME->value])->flush();
     }
 
     public function updated(): void
     {
-        Cache::forget(TasksEnum::TASKS_INDEX->value);
+        Cache::tags([TasksEnum::GLOBAL_NAME->value])->flush();
     }
 
     public function deleted(): void
     {
-        Cache::forget(TasksEnum::TASKS_INDEX->value);
+        Cache::tags([TasksEnum::GLOBAL_NAME->value])->flush();
     }
 }
