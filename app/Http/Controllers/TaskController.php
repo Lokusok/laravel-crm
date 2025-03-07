@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\Cache\TasksEnum;
 use App\Enums\PermissionsEnum;
 use App\Http\Requests\Tasks\StoreTaskRequest;
 use App\Http\Requests\Tasks\UpdateTaskRequest;
@@ -10,16 +11,16 @@ use App\Models\Project;
 use App\Models\Task;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Gate;
 
 class TaskController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        $tasks = Task::with(['user', 'client', 'project'])->paginate(20);
+        $tasks = Cache::remember(TasksEnum::TASKS_INDEX->value, 30, function () {
+            return Task::with(['user', 'client', 'project'])->latest()->paginate(20);
+        });
 
         return view('tasks.index', compact('tasks'));
     }
