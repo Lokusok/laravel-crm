@@ -1,6 +1,7 @@
 ## CRM-система на Laravel
 
 - Laravel
+- Roles via spatie package
 - Minio S3
 - Redis
 - Mailpit
