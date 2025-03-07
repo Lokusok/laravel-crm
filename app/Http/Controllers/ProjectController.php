@@ -10,6 +10,7 @@ use App\Models\Client;
 use App\Models\Project;
 use App\Models\User;
 use App\Services\PreviewUploader;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Gate;
 
@@ -20,7 +21,7 @@ class ProjectController extends Controller
     )
     {}
 
-    public function index()
+    public function index(Request $request)
     {
         $cacheKey = ProjectsEnum::GLOBAL_NAME->value . ':' . ($request->page ?? '0');
 

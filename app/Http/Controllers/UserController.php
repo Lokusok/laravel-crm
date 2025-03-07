@@ -6,11 +6,12 @@ use App\Enums\Cache\UsersEnum;
 use App\Models\User;
 use App\Http\Requests\Users\StoreUserRequest;
 use App\Http\Requests\Users\UpdateUserRequest;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $cacheKey = UsersEnum::USERS_INDEX->value . ':' . ($request->page ?? '0');
 

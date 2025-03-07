@@ -10,12 +10,13 @@ use App\Models\Client;
 use App\Models\Project;
 use App\Models\Task;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Gate;
 
 class TaskController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $cacheKey = TasksEnum::TASKS_INDEX->value . ':' . ($request->page ?? '0');
 
