@@ -3,12 +3,15 @@
 - Laravel
 - Minio S3
 - Redis
-- Docker
+- Mailpit
 - MySQL
+- Docker
 
 ---
 
 ## Запуск проекта
+
+**Предварительно, установите Composer: https://getcomposer.org/download/**
 
 1. `make install`
 2. `make start`
