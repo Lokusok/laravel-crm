@@ -5,7 +5,7 @@
                 {{ __('Edit project') }}
             </h2>
             @if ($project->preview_url)
-                <img src="{{ Storage::cloud()->url($project->preview_url) }}" alt="{{ $project->title }}">
+                <img src="{{ App\Cloud\AssetViewer::get($project->preview_url) }}" alt="{{ $project->title }}">
             @endif
         </div>
     </x-slot>

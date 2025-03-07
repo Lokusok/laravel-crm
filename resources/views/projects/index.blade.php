@@ -61,7 +61,7 @@
                                                         @if ($project->preview_url)
                                                             <img
                                                                 class="w-[60px] h-[60px]"
-                                                                src="{{ Storage::cloud()->url($project->preview_url) }}"
+                                                                src="{{ App\Cloud\AssetViewer::get($project->preview_url) }}"
                                                                 alt="{{ $project->title }}"
                                                             >
                                                         @else
